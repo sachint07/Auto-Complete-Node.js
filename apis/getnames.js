@@ -18,15 +18,20 @@ Router.get("/get/:searchedTerm", (request, reply) => {
 })
 
 
-function fetchNames(searchedTerm,callbackFetchNames) {
+function fetchNames(searchedTerm, callbackFetchNames) {
+
     R.db.redis.zrank("names-Females-A", searchedTerm).then((resultsRank) => {
         console.log(`-- > ${resultsRank}`);
-        R.db.redis.zrange("names-Females-A",resultsRank, -1)
-            .then((resultsRange) => {;
-                callbackFetchNames(null,resultsRange)
+        if(resultsRank==null){
+            return callbackFetchNames("error", null);
+        }
+        let count = resultsRank + 50;
+        R.db.redis.zrange("names-Females-A", resultsRank, count)
+            .then((resultsRange) => {
+                return callbackFetchNames(null, resultsRange)
             })
-    }).catch((e)=>{
-        callbackFetchNames(e,null);
+    }).catch((e) => {
+        return callbackFetchNames(e, null);
     })
 }
 
