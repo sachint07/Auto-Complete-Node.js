@@ -21,9 +21,8 @@ Router.get("/get/:searchedTerm", (request, reply) => {
 function fetchNames(searchedTerm,callbackFetchNames) {
     R.db.redis.zrank("names-Females-A", searchedTerm).then((resultsRank) => {
         console.log(`-- > ${resultsRank}`);
-        R.db.redis.zrange("names-Females-A", resultsRank, 50)
-            .then((resultsRange) => {
-                console.log(`-- > ${resultsRange}`);
+        R.db.redis.zrange("names-Females-A",resultsRank, -1)
+            .then((resultsRange) => {;
                 callbackFetchNames(null,resultsRange)
             })
     }).catch((e)=>{

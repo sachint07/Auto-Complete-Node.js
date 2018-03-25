@@ -21,7 +21,7 @@ This Web service api will fetch the names as per the word are typed.
     ex:-  node populateRedi.js names.txt
 
 
-5:- Install required node modules (as per the Package.json)
+5:- Install required node modules (as per the Package.json).
 
 
 # Hit API's and Required parameters :-
