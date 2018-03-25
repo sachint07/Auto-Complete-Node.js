@@ -18,6 +18,9 @@ This Web service api will fetch the names as per the word are typed.
 
 4:- run populateRedi.js Scripts to create DataSet for the Project.
 
+    ex:-  node populateRedi.js names.txt
+
+
 5:- Install required node modules (as per the Package.json)
 
 
